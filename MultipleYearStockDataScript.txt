@@ -1,0 +1,33 @@
+Sub StockMarket()
+
+    Cells(1, 9).Value = "Ticker"
+    Cells(1, 10).Value = "Total Stock Volume"
+        
+    Dim i As Double
+    Dim tcounter As Double
+    tcounter = 2
+    
+    For i = 2 To 760193
+        If (Cells(i + 1, 1).Value <> Cells(i, 1).Value) Then
+            Cells(tcounter, 9).Value = Cells(i, 1).Value
+            tcounter = tcounter + 1
+        End If
+    Next i
+       
+    Dim tsvolume As Double
+    tsvolume = 0
+    Dim vcounter As Double
+    vcounter = 2
+    
+    For i = 2 To 760193
+        If Cells(i, 1).Value = Cells(vcounter, 9) Then
+            tsvolume = tsvolume + Cells(i, 7).Value
+        Else
+            Cells(vcounter, 10).Value = tsvolume
+            tsvolume = Cells(i, 7).Value
+            vcounter = vcounter + 1
+            Cells(vcounter, 9).Value = Cells(i, 1).Value
+        End If
+    Next i
+    
+End Sub
